@@ -19,24 +19,22 @@ namespace TicksPerSecond
 
         static TicksPerSecond()
         {
-            Log.Message("TicksPerSecond starting up");
-
             HarmonyInstance harmony = HarmonyInstance.Create("rimworld.sparr.tickspersecond");
 
-            // find the DoRealtimeClock method of the class RimWorld.GlobalControlsUtility
-            MethodInfo targetmethod = AccessTools.Method(typeof(RimWorld.GlobalControlsUtility),"DoRealtimeClock");
+            // find the DoTimespeedControls method of the class RimWorld.GlobalControlsUtility
+            MethodInfo targetmethod = AccessTools.Method(typeof(RimWorld.GlobalControlsUtility),"DoTimespeedControls");
 
             // find the static method to call before (i.e. Prefix) the targetmethod
-            HarmonyMethod prefixmethod = new HarmonyMethod(typeof(TicksPerSecond).GetMethod("RimWorld_GlobalControlsUtility_DoRealtimeClock_Prefix"));
+            HarmonyMethod postfixmethod = new HarmonyMethod(typeof(TicksPerSecond).GetMethod("RimWorld_GlobalControlsUtility_DoTimespeedControls_Postfix"));
 
             // patch the targetmethod, by calling prefixmethod before it runs, with no postfixmethod (i.e. null)
-            harmony.Patch( targetmethod, prefixmethod, null ) ;
+            harmony.Patch( targetmethod, null, postfixmethod ) ;
 
             PrevTicks = -1;
             TPSActual = 0;
         }
 
-        public static void RimWorld_GlobalControlsUtility_DoRealtimeClock_Prefix(float leftX, float width, ref float curBaseY) {
+        public static void RimWorld_GlobalControlsUtility_DoTimespeedControls_Postfix(float leftX, float width, ref float curBaseY) {
 
             float TRM = Find.TickManager.TickRateMultiplier;
             int TPSTarget = (int)Math.Round((TRM == 0f) ? 0f : (60f * TRM));
