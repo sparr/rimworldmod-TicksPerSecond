@@ -1,4 +1,8 @@
 # TicksPerSecond
 
-A mod for the game Rimworld. Adds a counter of game ticks per second,
-displayed below the optional realtime clock.
+A mod for the game Rimworld. Add actual and target ticks per second to
+the information display above the pause/speed controls.
+
+http://github.com/sparr/rimworld-mod-TicksPerSecond
+
+![Screenshot showing "TPS 59(60)" above time controls](About/preview.png)

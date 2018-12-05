@@ -3,6 +3,6 @@
 	<name>TicksPerSecond</name>
 	<author>Sparr</author>
 	<targetVersion>1.0.2096</targetVersion>
-	<description>Add Ticks Per Second to the optional realtime clock display</description>
-	<url>https://github.com/sparr/rimworldmod-TicksPerSecond</url>
+	<description>Add actual and target ticks per second to the information display above the pause/speed controls.</description>
+	<url>https://github.com/sparr/rimworld-mod-TicksPerSecond</url>
 </ModMetaData>
